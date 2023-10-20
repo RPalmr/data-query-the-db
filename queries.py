@@ -22,10 +22,10 @@ def get_waiting_time(db):
     # and calculate an extra TimeDelta column displaying the number of days
     # between OrderDate and ShippedDate, ordered by ascending TimeDelta
     sql_query = """
-    SELECT *, (ShippedDate - OrderDate) AS DeliveryTime
+    SELECT *, (JULIANDAY(ShippedDate) - JULIANDAY(OrderDate)) AS JulianTime
     FROM orders
     WHERE ShippedDate IS NOT NULL
-    ORDER BY DeliveryTime ASC
+    ORDER BY JulianTime ASC
     """
     results = db.execute(sql_query)
     results = results.fetchall()
