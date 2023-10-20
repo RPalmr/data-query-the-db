@@ -2,7 +2,11 @@
 
 def query_orders(db):
     # return a list of orders displaying each column
-    pass  # YOUR CODE HERE
+    query = "SELECT * FROM ORDERS ORDER BY OrderID ASC;"
+    db.execute(query)
+    orders = [tuple(row) for row in db.fetchall()]
+    
+    return orders
 
 def get_orders_range(db, date_from, date_to):
     # return a list of orders displaying all columns with OrderDate between
